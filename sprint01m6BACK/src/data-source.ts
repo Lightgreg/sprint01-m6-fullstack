@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import path from "path";
 import { User } from "./entities/user.entity";
 import { Contacte } from "./entities/contacte.entity";
-import { createUserAndContactes1679448074784 } from "./migrations/1679448074784-createUserAndContactes";
+import { createUsersAndContactes1679498644126 } from "./migrations/1679498644126-create-users-and-contactes";
 
 
 const AppDataSource = new DataSource(
@@ -19,7 +19,7 @@ const AppDataSource = new DataSource(
             logging: true,
             synchronize: false,
             entities: [User, Contacte],
-            migrations: [createUserAndContactes1679448074784],
+            migrations: [createUsersAndContactes1679498644126],
         }
 );
 

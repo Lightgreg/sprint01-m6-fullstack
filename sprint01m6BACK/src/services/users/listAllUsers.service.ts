@@ -1,7 +1,7 @@
-import AppDataSource from "../data-source"
-import { User } from "../entities/user.entity"
-import { IUserResponse } from "../interfaces/users/users.interface"
-import { listUsersResponse } from "../serializers/user.serializers"
+import AppDataSource from "../../data-source"
+import { User } from "../../entities/user.entity"
+import { listUsersResponse } from "../../serializers/user.serializers"
+
 
 
 
