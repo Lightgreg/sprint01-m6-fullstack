@@ -34,7 +34,7 @@ const loginService = async (
     }
   );
 
-  return { token: token };
+  return { token: token, id: user.id };
 };
 
 export default loginService;
