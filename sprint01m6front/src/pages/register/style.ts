@@ -12,7 +12,7 @@ export const Window = styled.div`
 
 .btn{
   padding: 5px;
-  color: var(--grey-0);
+  color: var(--color-0);
   font-family: var(--font-f);
   font-weight: 600;
   cursor: pointer;
@@ -26,7 +26,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 10px;
-background-color: var(--grey-3);
+background-color: var(--color-3);
 position: absolute;
 top: 55px;
 }
@@ -53,14 +53,14 @@ top: 55px;
   font-family: 'Inter';
   font-size: 15px;
   font-weight: 700;
-  color:var(--grey-0); 
+  color:var(--color-0); 
   }
 
   h3{
   font-family: 'Inter';
   font-size: 10px;
   font-weight: 400;
-  color: var(--grey-1);
+  color: var(--color-1);
 
   }
 }
@@ -77,11 +77,11 @@ form{
 }
 
 .btn.return{
-  background: var(--grey-3);
+  background: var(--color-3);
 border-radius: 4px;
 
 &:hover{
-  background: var(--grey-2);
+  background: var(--color-2);
 }
 }
 
@@ -93,7 +93,7 @@ border-radius: 4px;
   margin-bottom: 10px;
   
   label{
-    color: var(--grey-0);
+    color: var(--color-0);
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -101,18 +101,18 @@ border-radius: 4px;
   }
 
   input{
-    background-color: var(--grey-2);
-    border: 2px solid var(--grey-2);
+    background-color: var(--color-2);
+    border: 2px solid var(--color-2);
     border-radius: 3px;
     padding: 6px;
   }
 
   select{
-     background-color: var(--grey-2);
-    border: 2px solid var(--grey-2);
+     background-color: var(--color-2);
+    border: 2px solid var(--color-2);
     border-radius: 3px;
     padding: 6px;
-    color: var(--grey-1);
+    color: var(--color-1);
   }
 
 }
@@ -134,7 +134,7 @@ border-radius: 4px;
 }
 
 p{
-  color: var(--grey-0);
+  color: var(--color-0);
 }
 
 `

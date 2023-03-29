@@ -5,16 +5,22 @@ export const Globalstyle = createGlobalStyle`
     --color-primary:#468339;
     --color-primary-focus:#40CC22;
 		--gradient1:#1E1F27;
+		--gradient1-opacity:#1E1F2790;
 		--gradient2:#2F4147;
     --color-primary-negative:#47A433;
     --color-sucess:#3FE864;
     --color-negative:#E83F5B;
-    --grey-0:#F8F9FA;
-    --grey-1:#888E92;
-    --grey-2:#343B41;
-    --grey-3:#212529;
-    --grey-4:#121214;
-    --grey-4-opacity:#12121490;
+		--green-01:#A1D890;
+		--green-02:#70B45A;
+		--green-03:#286C12;
+		--green-04:#114800;
+		--color:#94A4B9;
+    --color-0:#476082;
+    --color-1:#364355;
+    --color-2:#1F2B3C;
+    --color-3:#081220;
+    --color-4:#121214;
+    --color-4-opacity:#12121490;
 
 		--font-f:'Roboto Mono', monospace;
   }
@@ -78,4 +84,7 @@ img{
 	width: 100%;
 }
 
+button{
+	cursor: pointer;
+}
 `

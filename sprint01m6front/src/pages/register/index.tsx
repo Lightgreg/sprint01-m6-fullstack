@@ -44,7 +44,6 @@ function RegisterPage() {
             <input placeholder="Confirmar Senha" type='password'/>           
           </div>
 
-
           <button className="btn register" type="submit">Cadastrar</button>
         </form>
       </div>

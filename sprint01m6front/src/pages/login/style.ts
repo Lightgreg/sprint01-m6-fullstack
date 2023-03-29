@@ -1,16 +1,5 @@
 import styled from "styled-components";
 
-export const Window = styled.div`
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;  
-  background:linear-gradient(var(--gradient1),var(--gradient2));
-  width: 100vw;
-  height: 100vh;
-  transition: 1s ease;
-  `
-
 export const ContainerLogin = styled.div`
   display:flex;
   justify-content: center;
@@ -21,7 +10,7 @@ export const ContainerLogin = styled.div`
   min-width: 250px;
   max-width: 399px;
   border-radius: 3px;
-  background-color: var(--grey-3);
+  background-color: var(--color-3);
   margin-top: 20px;
 
 
@@ -29,7 +18,7 @@ export const ContainerLogin = styled.div`
     font-family: var(--font-f);
     font-size: 16px;
     font-weight: 800; 
-    color: var(--grey-0);
+    color: var(--color);
   }
 
   .btn{
@@ -57,9 +46,9 @@ export const ContainerLogin = styled.div`
   }
 
   .btn.newaccount{
-    background-color: var(--grey-1);
+    background-color: var(--color-1);
     max-width: 500px;
-    color: var(--grey-0);
+    color: var(--color);
   }
   .btn.newaccount:hover{
     filter: brightness(110%);
@@ -68,13 +57,13 @@ export const ContainerLogin = styled.div`
   .account{
     font-family: var(--font-f);
     font-size: 10px;
-    color: var(--grey-1);
+    color: var(--color-1);
     margin-bottom: 10px;
   }
 
   label{
     font-family: var(--font-f);
-    color: var(--grey-0);
+    color: var(--color);
     font-size: 10px;
   }
 
@@ -91,7 +80,7 @@ export const ContainerLogin = styled.div`
     width: 100%;   
     border-radius: 3px;
     padding: 0px 13px 0px 13px;
-    background-color: var(--grey-2);  
+    background-color: var(--color-2);  
     border:none;
   }   
 
@@ -101,14 +90,14 @@ export const ContainerLogin = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    background-color: var(--grey-2);
+    background-color: var(--color-2);
     border-radius: 3px;
     padding-right: 5px;
   }
 
   input.password{
     width:85%;   
-    background-color: var(--grey-2);
+    background-color: var(--color-2);
     border-radius: 3px;   
   }
 
@@ -118,7 +107,7 @@ export const ContainerLogin = styled.div`
     max-width: 500px;
 
     p{
-      color: var(--grey-0);
+      color: var(--color);
       margin-bottom: 2px;
     }
 
