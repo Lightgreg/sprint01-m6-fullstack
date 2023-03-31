@@ -2,12 +2,13 @@
 import { AiFillEye } from "react-icons/ai"
 import { Toaster } from 'react-hot-toast';
 import { ContainerLogin, Title1 } from './style';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from "../../contexts/userContext";
 import {Backgroundscreen} from "../../components/defaultBackground/style";
 
 function LoginPage() {
-  const { userLogin, handleLogin, login, loginError, registerPage } = useContext(UserContext)
+
+  const { userLogin, handleLogin, login, loginError, registerPage,  } = useContext(UserContext)
 
   return (
     <>      

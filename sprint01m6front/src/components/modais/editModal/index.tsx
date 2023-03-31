@@ -1,22 +1,22 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../contexts/modalContext";
-import BackgroundEditmodal from "./style";
+import { UserContext } from "../../../contexts/userContext";
+import { Backgroundmodal } from "../style";
 
-function EditModal() {
-  const { openOrCloseModal } = useContext(ModalContext)
-
+function EditModal({submit} :any) {
+  const { openOrCloseModal, registerEditContacte, seeItensModal } = useContext(UserContext)
+  
   return (
-    <BackgroundEditmodal>
+    <Backgroundmodal>
       <div className={`box01`}>
         <div className="centerBox">
           <div className="headContacteBox">
-            <p className="contacteTitle">Editar usuario</p>
-            <button className="btnCloseModal" onClick={() => openOrCloseModal('perfil',false)}>X</button>
+            <p className="modalTitle">Editar Contato</p>
+            <button className="btnCloseModal" onClick={() => openOrCloseModal('editContacte',false)}>X</button>
           </div>
 
           <form
             className="createContacteForm"
-          // onSubmit={handleSubmit(createPost)}
+            onSubmit={submit}
           >
             <label htmlFor="addContacteNameInput">
               Nome:
@@ -25,7 +25,8 @@ function EditModal() {
                 id="addContacteNameInput"
                 type="text"
                 placeholder="Nome do Contato"
-              // {...register("name")}
+                defaultValue={''}
+                {...registerEditContacte("name")}
               />
             </label>
             <label htmlFor="addContacteEmailInput">
@@ -35,7 +36,8 @@ function EditModal() {
                 id="addContacteEmailInput"
                 type="text"
                 placeholder="Email do Contato"
-              // {...register("email")}
+                defaultValue={''}
+                {...registerEditContacte("email")}
               />
             </label>
             <label htmlFor="addContactePhoneInput">
@@ -45,7 +47,8 @@ function EditModal() {
                 id="addContactePhoneInput"
                 type="text"
                 placeholder="Telefone do Contato"
-              // {...register("phone")}
+                defaultValue={''}
+                {...registerEditContacte("phone")}
               />
             </label>
 
@@ -55,7 +58,7 @@ function EditModal() {
           </form>
         </div>
       </div>
-    </BackgroundEditmodal>
+    </Backgroundmodal>
   )
 }
 

@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../contexts/modalContext";
+import { UserContext } from "../../../contexts/userContext";
 import { iPerfilProps } from "../../../interfaces/interfaces";
-import { Backgroundmodal } from "../contacteModal/style"
+import { Backgroundmodal } from "../style";
 
 function PerfilModal(props: iPerfilProps) {
-  const { openOrCloseModal, changeModal } = useContext(ModalContext)
+  const { openOrCloseModal, changeModal } = useContext(UserContext)
 
   return (
     <Backgroundmodal>
@@ -13,12 +13,17 @@ function PerfilModal(props: iPerfilProps) {
           <div className="headContacteBox">
             <button className="btnCloseModal" onClick={() => openOrCloseModal('perfil', false)}>X</button>
           </div>
-          <p className="contacteTitle">{props.name}</p>
-          <p className="contacteTitle">{props.email}</p>
-          <p className="contacteTitle">{props.phone}</p>
+          <div className="centerModal">
+            <span>Nome:</span>
+            <p className="centerInformations">{props.name}</p>
+            <span>Email:</span>
+            <p className="centerInformations">{props.email}</p>
+            <span>Telefone:</span>
+            <p className="centerInformations">{props.phone}</p>
+          </div>
           <div className="btnBox">
-            <button className="btnYes" onClick={() => changeModal('perfil', 'delete')}  >Deletar conta</button>
-            <button className="btnNo" onClick={() => changeModal('perfil', 'editUser')}>Editar</button>
+            <button className="btn del" onClick={() => changeModal('perfil', 'delete')}  >Excluir</button>
+            <button className="btn edit" onClick={() => changeModal('perfil', 'editContacte')}>Editar</button>
           </div>
         </div>
       </div>

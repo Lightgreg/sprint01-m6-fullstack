@@ -27,6 +27,13 @@ export interface iContacte {
   phone: string;
   createdAt: string;
 }
+export interface iEditContacte {
+  id?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  createdAt?: string;
+}
 
 export interface iPerfilProps {
   id?: string;
@@ -59,21 +66,48 @@ export interface iUserContext {
   returnLogin: () => void
   registerPage: () => void
   signOut: () => void
-}
-
-export interface iModalContext {
+  refreshPage: () => void
+  setuserinfos: React.Dispatch<React.SetStateAction<iUser | null>>
+  setlistContactes: React.Dispatch<React.SetStateAction<iContacte[] | []>>
+  // ---------MODAIS----------
   seeCreateContacteModal: boolean
   seePerfilModal: boolean
   seeEditModal: boolean
   seeDeleteModal: boolean
   seeEditUserModal: boolean
-  openOrCloseModal: (modal: string , change: boolean) => void
+  openOrCloseModal: (modal: string, change: boolean) => void
   seeItensModal: iUser | iContacte | null
   setseeItensModal: React.Dispatch<React.SetStateAction<iUser | iContacte | null>>
   changeModal(modal01: string, modal02: string): void
+  // --------------CONTACTES---------
+  registerContacte: UseFormRegister<iContacte>
+  submitContacte: UseFormHandleSubmit<iContacte>
+  contacteError: FieldErrors<iContacte>
+  deleteItem(id: string | undefined): void
+  createContacte(data: iContacte): void
+  registerEditContacte: UseFormRegister<iEditContacte>
+  submitEditContacte: UseFormHandleSubmit<iEditContacte>
+  editContacteError: FieldErrors<iContacte>
+  editContacte(data: iEditContacte): void
 }
 
-export interface iContacteContext {
+// export interface iModalContext {
+//   seeCreateContacteModal: boolean
+//   seePerfilModal: boolean
+//   seeEditModal: boolean
+//   seeDeleteModal: boolean
+//   seeEditUserModal: boolean
+//   openOrCloseModal: (modal: string , change: boolean) => void
+//   seeItensModal: iUser | iContacte | null
+//   setseeItensModal: React.Dispatch<React.SetStateAction<iUser | iContacte | null>>
+//   changeModal(modal01: string, modal02: string): void
+// }
 
-}
+// export interface iContacteContext {
+//   registerContacte: UseFormRegister<iContacte>
+//   submitContacte: UseFormHandleSubmit<iContacte>
+//   contacteError: FieldErrors<iContacte> 
+//   deleteItem(id: string | undefined): void
+//   createContacte(data: iContacte): void
+// }
 

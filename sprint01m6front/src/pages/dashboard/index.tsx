@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { Toaster } from "react-hot-toast"
 import Card from "../../components/card"
 import { Backgroundscreen } from "../../components/defaultBackground/style"
@@ -11,11 +11,11 @@ import PerfilModal from "../../components/modais/perfilModal"
 import { UserContext } from "../../contexts/userContext"
 import { Title1 } from "../login/style"
 import { DashContainer } from "./style"
-import { ModalContext } from "../../contexts/modalContext"
+// import { ModalContext } from "../../contexts/modalContext"
 
 function Dashboard() {
-  const { signOut, listContactes, userinfos } = useContext(UserContext)
-  const { seeCreateContacteModal, openOrCloseModal, seePerfilModal, seeEditModal, seeItensModal, setseeItensModal, seeDeleteModal } = useContext(ModalContext)  
+  const { signOut, listContactes, userinfos, seeCreateContacteModal, openOrCloseModal, seePerfilModal, seeEditModal, seeItensModal, setseeItensModal, seeDeleteModal, submitEditContacte, editContacte } = useContext(UserContext)
+  // const { } = useContext(ModalContext)  
 
   function setInfos(infos: iUser | iContacte | null, modal:string ) {
     setseeItensModal(infos)
@@ -44,14 +44,14 @@ function Dashboard() {
           <ul className="rightSquare">
             {listContactes.length > 0 ? (
               listContactes.map((e: iContacte) =>
-                <Card name={e.name} email={e.email} phone={e.phone} key={e.id} click={()=>setInfos(e,'perfil')} />)
+                <Card {...e} key={e.id} click={()=>setInfos(e,'perfil')} />)
             ) : (<h1>Adicione contatos para poder visualizalos aqui em lista.</h1>)}
           </ul>
 
         </DashContainer>
       </Backgroundscreen>
       {!!seeCreateContacteModal && < ContacteModal />}
-      {!!seeEditModal && < EditModal />}
+      {!!seeEditModal && < EditModal submit={submitEditContacte(editContacte)}/>}
       {!!seeDeleteModal && < DeleteModal {...seeItensModal} />}
       {!!seePerfilModal && < PerfilModal {...seeItensModal} />}
     </>

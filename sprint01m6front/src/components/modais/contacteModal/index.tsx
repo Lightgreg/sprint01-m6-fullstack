@@ -1,22 +1,24 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../contexts/modalContext";
-import { Backgroundmodal } from "./style";
+import { SubmitHandler } from "react-hook-form";
+import { UserContext } from "../../../contexts/userContext";
+import { iContacte } from "../../../interfaces/interfaces";
+import { Backgroundmodal } from "../style";
 
 function ContacteModal() {
-  const { openOrCloseModal } = useContext(ModalContext)
+  const { openOrCloseModal, submitContacte, registerContacte, contacteError, createContacte } = useContext(UserContext)
 
   return (
     <Backgroundmodal>
       <div className={`box01`}>
         <div className="centerBox">
           <div className="headContacteBox">
-            <p className="contacteTitle">Crie seu contato</p>
-            <button className="btnCloseModal" onClick={() => openOrCloseModal('contacte',false)}>X</button>
+            <p className="modalTitle">Crie seu contato</p>
+            <button className="btnCloseModal" onClick={() => openOrCloseModal('contacte', false)}>X</button>
           </div>
 
           <form
             className="createContacteForm"
-          // onSubmit={handleSubmit(createPost)}
+            onSubmit={submitContacte(createContacte)}
           >
             <label htmlFor="addContacteNameInput">
               Nome:
@@ -25,9 +27,11 @@ function ContacteModal() {
                 id="addContacteNameInput"
                 type="text"
                 placeholder="Nome do Contato"
-              // {...register("name")}
+                {...registerContacte("name")}
               />
+              <p>{contacteError.name?.message}</p>
             </label>
+
             <label htmlFor="addContacteEmailInput">
               Email:
               <input
@@ -35,9 +39,11 @@ function ContacteModal() {
                 id="addContacteEmailInput"
                 type="text"
                 placeholder="Email do Contato"
-              // {...register("email")}
+                {...registerContacte("email")}                
               />
+              <p>{contacteError.email?.message}</p>
             </label>
+
             <label htmlFor="addContactePhoneInput">
               Telefone:
               <input
@@ -45,8 +51,9 @@ function ContacteModal() {
                 id="addContactePhoneInput"
                 type="text"
                 placeholder="Telefone do Contato"
-              // {...register("phone")}
+                {...registerContacte("phone")}
               />
+              <p>{contacteError.phone?.message}</p>
             </label>
 
             <button type="submit" className="addBtn">

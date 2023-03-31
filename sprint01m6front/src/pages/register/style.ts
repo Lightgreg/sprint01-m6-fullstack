@@ -37,8 +37,8 @@ top: 55px;
   width: 100%;  
   justify-content: space-between;
   margin-bottom: 15px;
-  position: relative;
-  top: -45px;
+  position: absolute;
+  top: -60px;
 }
 
 .registerSlogan{

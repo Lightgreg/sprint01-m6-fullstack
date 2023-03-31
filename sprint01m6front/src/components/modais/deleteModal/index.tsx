@@ -1,12 +1,16 @@
 import { useContext } from "react";
-import { ModalContext } from "../../../contexts/modalContext";
 import { UserContext } from "../../../contexts/userContext";
 import { iContacte, iPerfilProps, iUser } from "../../../interfaces/interfaces";
-import { Backgroundmodal } from "../contacteModal/style"
+import { Backgroundmodal } from "../style";
 
 function DeleteModal(props: iPerfilProps) {
 
-  const { openOrCloseModal } = useContext(ModalContext)
+  const { openOrCloseModal, deleteItem } = useContext(UserContext)
+
+  function deleteAndCloseModal() {    
+    deleteItem(props?.id)
+    openOrCloseModal('delete',false)
+  }
 
   return (
     <Backgroundmodal>
@@ -15,14 +19,16 @@ function DeleteModal(props: iPerfilProps) {
           <div className="headContacteBox">
             <button className="btnCloseModal" onClick={() => openOrCloseModal('delete', false)}>X</button>
           </div>
-          <p className="contacteTitle">Tem certeza que dejesa deletar? este item.</p>
-          <p className="contacteTitle">{props?.name}</p>
-          <p className="contacteTitle">{props?.email}</p>
-          <p className="contacteTitle">{props?.phone}</p>
-          <p className="contacteTitle">esta ação não pode ser desfeita!</p>
+          <p className="contacteTitle01">Tem certeza que dejesa deletar este item?</p>
+          <div className="centerDeleteModal">
+            <p className="centerInformations">{props?.name}</p>
+            <p className="centerInformations">{props?.email}</p>
+            <p className="centerInformations">{props?.phone}</p>
+          </div>
+          <p className="contacteTitle02">esta ação não pode ser desfeita!</p>
           <div className="btnBox">
-            <button className="btnYes">Certeza</button>
-            <button className="btnNo" onClick={() => openOrCloseModal('delete',false)}>Desistir</button>
+            <button className="btn del" onClick={() => deleteAndCloseModal() }>Certeza</button>
+            <button className="btn edit" onClick={() => openOrCloseModal('delete',false)}>Desistir</button>
           </div>
         </div>
       </div>
