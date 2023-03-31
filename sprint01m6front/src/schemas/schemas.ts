@@ -4,7 +4,7 @@ export const registerSchema = yup.object().shape({
   name: yup.string().required('Nome é obrigatorio'),
   email: yup.string().required('Email é obrigatorio'),
   password: yup.string().required('Senha é obrigatorio').min(6, 'Senha no minimo de 6 caracteres'),
-  phone: yup.string().required('Numero é obrigatorio'),
+  phone: yup.string().required('Telefone é obrigatorio'),
 })
 
 export const editUserSchema = yup.object().shape({

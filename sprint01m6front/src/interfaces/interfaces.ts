@@ -6,6 +6,7 @@ export  interface iProviderProps {
 }
 
 export interface iUser {
+  user: boolean;
   id?: string;
   name: string;
   email: string;
@@ -21,6 +22,7 @@ export interface iLogin {
 }
 
 export interface iContacte {
+  user: boolean;
   id: string;
   name: string;
   email: string;
@@ -48,7 +50,7 @@ export interface iPerfilProps {
 export interface iUserContext {
   user: iUser | null;
   listContactes: iContacte[] | [];
-  userinfos: iUser | null;
+  userinfos: iUser | undefined;
   userLogin(data: iLogin): void;
   handleLogin: UseFormHandleSubmit<iLogin>
   login: UseFormRegister<iLogin>
@@ -66,8 +68,8 @@ export interface iUserContext {
   returnLogin: () => void
   registerPage: () => void
   signOut: () => void
-  refreshPage: () => void
-  setuserinfos: React.Dispatch<React.SetStateAction<iUser | null>>
+  refreshPage(id: string | null): void
+  setuserinfos: React.Dispatch<React.SetStateAction<iUser | undefined>>
   setlistContactes: React.Dispatch<React.SetStateAction<iContacte[] | []>>
   // ---------MODAIS----------
   seeCreateContacteModal: boolean

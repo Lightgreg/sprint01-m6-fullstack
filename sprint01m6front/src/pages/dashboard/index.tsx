@@ -11,13 +11,12 @@ import PerfilModal from "../../components/modais/perfilModal"
 import { UserContext } from "../../contexts/userContext"
 import { Title1 } from "../login/style"
 import { DashContainer } from "./style"
-// import { ModalContext } from "../../contexts/modalContext"
 
 function Dashboard() {
   const { signOut, listContactes, userinfos, seeCreateContacteModal, openOrCloseModal, seePerfilModal, seeEditModal, seeItensModal, setseeItensModal, seeDeleteModal, submitEditContacte, editContacte } = useContext(UserContext)
-  // const { } = useContext(ModalContext)  
 
-  function setInfos(infos: iUser | iContacte | null, modal:string ) {
+  function setInfos(infos:any, modal: string, option: boolean) { 
+    infos.user = option
     setseeItensModal(infos)
     openOrCloseModal(modal, true)
   }
@@ -38,13 +37,13 @@ function Dashboard() {
             </div>
             <button className="leftSquareBtn small"
               onClick={() => openOrCloseModal('contacte', true)}>Criar Contato</button>
-            <button className="leftSquareBtn perfil" onClick={() => setInfos(userinfos,'perfil')}>Perfil</button>
+            <button className="leftSquareBtn perfil" onClick={() => setInfos(userinfos,'perfil',true)}>Perfil</button>
             <button className="leftSquareBtn exit" onClick={() => signOut()}>Sair</button>
           </section>
           <ul className="rightSquare">
             {listContactes.length > 0 ? (
               listContactes.map((e: iContacte) =>
-                <Card {...e} key={e.id} click={()=>setInfos(e,'perfil')} />)
+                <Card {...e} key={e.id} click={()=>setInfos(e,'perfil',false)} />)
             ) : (<h1>Adicione contatos para poder visualizalos aqui em lista.</h1>)}
           </ul>
 

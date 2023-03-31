@@ -30,8 +30,8 @@ function RegisterPage() {
             <p>{errors.email?.message}</p>
           </div>
           <div className="inputSquare">
-            <label htmlFor="phone">Contato</label>
-            <input placeholder="Digite aqui seu Telefone" {...register('phone')} />           
+            <label htmlFor="phone">Telefone</label>
+            <input placeholder="Digite aqui seu Telefone" {...register('phone')} />      <p>{errors.phone?.message}</p>        
           </div>
           <div className="inputSquare">
           <label htmlFor="password">Senha</label>

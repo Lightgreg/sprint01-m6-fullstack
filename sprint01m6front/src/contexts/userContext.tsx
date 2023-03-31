@@ -13,12 +13,12 @@ import { contacteSchema, editContacteSchema, loginSchema, registerSchema } from 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
 export function UserProvider({ children }: iProviderProps) {
-  
+
   const navigate = useNavigate()
 
   const [user, setUser] = useState<iUser | null>(null)
-  const [userinfos, setuserinfos] = useState<iUser | null>(null)
-  const [listContactes, setlistContactes] = useState<iContacte[] | []>([]) 
+  const [userinfos, setuserinfos] = useState<iUser | undefined >()
+  const [listContactes, setlistContactes] = useState<iContacte[] | []>([])
 
   const { register, handleSubmit, formState: { errors } } = useForm<iUser>({
     resolver: yupResolver(registerSchema)
@@ -28,34 +28,19 @@ export function UserProvider({ children }: iProviderProps) {
     resolver: yupResolver(loginSchema),
   });
 
-  useEffect(() => {
-    const id = localStorage.getItem('@MyList:USERID')
+  function refreshPage(id: string | null) {
+    // const id = localStorage.getItem('@MyList:USERID')
     const token = localStorage.getItem('@MyList:TOKEN')
 
-    if (token) {
-
+    if (id && token) {
       api.defaults.headers.authorization = `Bearer ${token}`
       api
         .get(`users/${id}`)
         .then(res => {
           setuserinfos(res.data)
-          navigate('dashboard', { replace: true })
           setlistContactes(res.data.contactes)
         })
     }
-  }, [])
-
-    function refreshPage() {
-    const id = localStorage.getItem('@MyList:USERID')
-    const token = localStorage.getItem('@MyList:TOKEN')
-
-    api.defaults.headers.authorization = `Bearer ${token}`
-     api
-      .get(`users/${id}`)
-      .then(res => {
-        setuserinfos(res.data)
-        setlistContactes(res.data.contactes)
-      })
   }
 
   function userRegister(data: iUser) {
@@ -75,20 +60,48 @@ export function UserProvider({ children }: iProviderProps) {
       })
   }
 
+  function editUser(data: iEditContacte) {
+    const id = localStorage.getItem('@MyList:USERID')
+    api
+      .patch(`user/${seeItensModal?.id}`, data)
+      .then(() => {
+        refreshPage(id)
+        openOrCloseModal('user', false)
+      })
+  }
+
+  function deleteUser() {
+    const idUser = localStorage.getItem('@MyList:USERID')
+    api
+      .delete(`user/${idUser}`)
+      .then(() => {
+        localStorage.removeItem('@MyList:USERID')
+        localStorage.removeItem('@MyList:TOKEN')
+        setTimeout(() => {
+          navigate('/')
+        }, 500);
+      })
+  }
+
+  function toEdit() {
+    if (seeItensModal?.user) {
+      
+    }
+  }
+
   function userLogin(data: iLogin) {
     api
       .post('login', data)
       .then((res) => {
         localStorage.setItem("@MyList:USERID", res.data.id);
         localStorage.setItem("@MyList:TOKEN", res.data.token);
-        const token = localStorage.getItem('@MyList:TOKEN')
-        api.defaults.headers.authorization = `Bearer ${token}`
+        api.defaults.headers.authorization = `Bearer ${res.data.token}`
         setUser(res.data)
         toast.success('Usuario logado com sucesso')
-        refreshPage()
         setTimeout(() => {
           navigate('dashboard', { replace: true })
         }, 500);
+        refreshPage(res.data.id)
       })
       .catch((err: any) => {
         console.log(err)
@@ -123,32 +136,52 @@ export function UserProvider({ children }: iProviderProps) {
   });
 
   function createContacte(data: iContacte) {
+    const id = localStorage.getItem('@MyList:USERID')
     const token = localStorage.getItem('@MyList:TOKEN')
     api.defaults.headers.authorization = `Bearer ${token}`
 
     api
       .post('contacte', data)
       .then(() => {
-        refreshPage()
-        openOrCloseModal('contacte',false)
+        refreshPage(id)
+        openOrCloseModal('contacte', false)
       })
   }
 
-  function editContacte(data: iEditContacte) {  
+  function editContacte(data: iEditContacte) {
+    const id = localStorage.getItem('@MyList:USERID')
     api
       .patch(`contacte/${seeItensModal?.id}`, data)
       .then(() => {
-        refreshPage()
+        refreshPage(id)
         openOrCloseModal('editContacte', false)
       })
 
   }
 
   function deleteItem(id: string) {
+    const idUser = localStorage.getItem('@MyList:USERID')
     api
       .delete(`contacte/${id}`)
-      .then(() => { refreshPage() })
+      .then(() => { refreshPage(idUser) })
   }
+
+  useEffect(() => {
+    const id = localStorage.getItem('@MyList:USERID')
+    const token = localStorage.getItem('@MyList:TOKEN')
+
+    if (token) {
+
+      api.defaults.headers.authorization = `Bearer ${token}`
+      api
+        .get(`users/${id}`)
+        .then(res => {
+          setuserinfos(res.data)
+          navigate('dashboard', { replace: true })
+          setlistContactes(res.data.contactes)
+        })
+    }
+  }, [])
 
 
 
@@ -182,7 +215,7 @@ export function UserProvider({ children }: iProviderProps) {
   function changeModal(modal01: string, modal02: string) {
     openOrCloseModal(modal01, false)
     openOrCloseModal(modal02, true)
-  }    
+  }
 
   return (
     <UserContext.Provider value={({ user, setUser, userLogin, handleLogin, returnLogin, userRegister, login, handleSubmit, register, loginError, errors, registerPage, listContactes, userinfos, signOut, refreshPage, setuserinfos, setlistContactes, registerContacte, submitContacte, contacteError, deleteItem, createContacte, seeCreateContacteModal, seePerfilModal, seeEditModal, seeDeleteModal, seeEditUserModal, openOrCloseModal, seeItensModal, setseeItensModal, changeModal, registerEditContacte, submitEditContacte, editContacteError, editContacte })}>
