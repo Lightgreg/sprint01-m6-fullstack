@@ -30,6 +30,60 @@ export const Backgroundmodal = styled.main`
       }
     }
 
+    .centerEditUserBox{
+    width: 80%;
+    height: 90%;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 200px;
+    max-height: 600px;
+    background-color: var(--color-4);
+    border-radius: 8px;
+    box-shadow: 0 0 40px 25px gray;
+    border: 4px solid white;
+    position: relative;
+
+    .btnBox{      
+      display: flex;
+      justify-content: space-around;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 10px;
+      position: absolute;
+      bottom: 30px;
+      left: 25px;
+
+      .btn{
+        padding: 9px;
+        border-radius: 6px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: rgb(205, 205, 205);
+      }
+
+      .btn:hover{
+        filter: brightness(130%);
+      }
+
+      .del{
+        background-color: var(--color-negative);
+      }
+      .edit{
+        background-color: var(--green-03);
+      }
+    }
+    .addEditUserBtn{
+      background: var(--green-04);
+      color: papayawhip;
+      padding: 3px;
+      width: 80%;
+      border-radius: 8px;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    }
+
     .centerBox{
     width: 80%;
     height: 90%;

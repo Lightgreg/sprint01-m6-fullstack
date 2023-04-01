@@ -3,8 +3,6 @@ import { User } from "../../entities/user.entity"
 import { IUserUpdate } from "../../interfaces/users/users.interface"
 import { userResponseSerializer } from "../../serializers/user.serializers"
 
-
-
 const updateUserService = async (IdUser: string, updatedUser: IUserUpdate) => {
   const usersRep = AppDataSource.getRepository(User)
 

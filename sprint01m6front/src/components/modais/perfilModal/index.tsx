@@ -4,7 +4,15 @@ import { iPerfilProps } from "../../../interfaces/interfaces";
 import { Backgroundmodal } from "../style";
 
 function PerfilModal(props: iPerfilProps) {
-  const { openOrCloseModal, changeModal } = useContext(UserContext)
+  const { openOrCloseModal, changeModal, seeItensModal } = useContext(UserContext)
+
+  function verifyUser() {
+    if (seeItensModal?.user == true) {
+      return'user'
+    } else {
+      return'editContacte'      
+    }
+  }
 
   return (
     <Backgroundmodal>
@@ -23,7 +31,7 @@ function PerfilModal(props: iPerfilProps) {
           </div>
           <div className="btnBox">
             <button className="btn del" onClick={() => changeModal('perfil', 'delete')}  >Excluir</button>
-            <button className="btn edit" onClick={() => changeModal('perfil', 'editContacte')}>Editar</button>
+            <button className="btn edit" onClick={() => changeModal('perfil', verifyUser())}>Editar</button>
           </div>
         </div>
       </div>

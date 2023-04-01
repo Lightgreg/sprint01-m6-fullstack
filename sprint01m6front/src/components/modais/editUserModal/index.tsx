@@ -2,16 +2,16 @@ import { useContext } from "react";
 import { UserContext } from "../../../contexts/userContext";
 import { Backgroundmodal } from "../style";
 
-function EditModal({ submit }: any) {
-  const { openOrCloseModal, registerEditContacte, seeItensModal } = useContext(UserContext)
+function EditUserModal({ submit }: any) {
+  const { openOrCloseModal, registerEditUser } = useContext(UserContext)
 
   return (
     <Backgroundmodal>
       <div className={`box01`}>
-        <div className="centerBox">
+        <div className="centerEditUserBox">
           <div className="headContacteBox">
             <p className="modalTitle">Editar Contato</p>
-            <button className="btnCloseModal" onClick={() => openOrCloseModal('editContacte', false)}>X</button>
+            <button className="btnCloseModal" onClick={() => openOrCloseModal('user', false)}>X</button>
           </div>
 
           <form
@@ -24,9 +24,9 @@ function EditModal({ submit }: any) {
                 className="inputDefault"
                 id="addContacteNameInput"
                 type="text"
-                placeholder="Nome do Contato"
+                placeholder="Nome do Usuario"
                 defaultValue={''}
-                {...registerEditContacte("name")}
+                {...registerEditUser("name")}
               />
             </label>
             <label htmlFor="addContacteEmailInput">
@@ -35,9 +35,9 @@ function EditModal({ submit }: any) {
                 className="inputDefault"
                 id="addContacteEmailInput"
                 type="text"
-                placeholder="Email do Contato"
+                placeholder="Email do Usuario"
                 defaultValue={''}
-                {...registerEditContacte("email")}
+                {...registerEditUser("email")}
               />
             </label>
             <label htmlFor="addContactePhoneInput">
@@ -46,12 +46,33 @@ function EditModal({ submit }: any) {
                 className="inputDefault"
                 id="addContactePhoneInput"
                 type="text"
-                placeholder="Telefone do Contato"
+                placeholder="Telefone do Usuario"
                 defaultValue={''}
-                {...registerEditContacte("phone")}
+                {...registerEditUser("phone")}
               />
             </label>         
-            <button type="submit" className="addBtn">
+            <label htmlFor="addContactePhoneInput">
+              Senha:
+              <input
+                className="inputDefault"
+                id="addContactePhoneInput"
+                type="text"
+                placeholder="Senha do Usuario"
+                defaultValue={''}
+                {...registerEditUser("password")}
+              />
+            </label>         
+            <label htmlFor="addContactePhoneInput">
+              Confirmar Senha:
+              <input
+                className="inputDefault"
+                id="addContactePhoneInput"
+                type="text"
+                placeholder="Confirmar Senha do Usuario"
+                defaultValue={''}                
+              />
+            </label>         
+            <button type="submit" className="addEditUserBtn">
               Confirmar
             </button>
           </form>
@@ -61,4 +82,4 @@ function EditModal({ submit }: any) {
   )
 }
 
-export default EditModal
+export default EditUserModal

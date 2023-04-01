@@ -15,6 +15,16 @@ export interface iUser {
   createdAt?: string;
   contactes?: iContacte[];
 }
+export interface iEditUser {
+  user: boolean;
+  id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  createdAt?: string;
+  contactes?: iContacte[];
+}
 
 export interface iLogin {
   email: string;
@@ -71,6 +81,12 @@ export interface iUserContext {
   refreshPage(id: string | null): void
   setuserinfos: React.Dispatch<React.SetStateAction<iUser | undefined>>
   setlistContactes: React.Dispatch<React.SetStateAction<iContacte[] | []>>
+  registerEditUser: UseFormRegister<iEditUser>
+  submitEditUser: UseFormHandleSubmit<iEditUser>
+  editUserError: FieldErrors<iEditUser>
+  editUser(data: iEditContacte): void
+  deleteUser(): void
+
   // ---------MODAIS----------
   seeCreateContacteModal: boolean
   seePerfilModal: boolean

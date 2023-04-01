@@ -7,8 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import api from "../services/api";
 import { useForm } from 'react-hook-form';
-import { iContacte, iEditContacte, iLogin, iProviderProps, iUser, iUserContext } from "../interfaces/interfaces";
+import { iContacte, iEditContacte, iEditUser, iLogin, iProviderProps, iUser, iUserContext } from "../interfaces/interfaces";
 import { contacteSchema, editContacteSchema, loginSchema, registerSchema } from "../schemas/schemas";
+import { editUserSchema } from "../schemas/schemas";
 
 export const UserContext = createContext<iUserContext>({} as iUserContext);
 
@@ -28,8 +29,11 @@ export function UserProvider({ children }: iProviderProps) {
     resolver: yupResolver(loginSchema),
   });
 
+  const { register: registerEditUser, handleSubmit: submitEditUser, formState: { errors: editUserError } } = useForm<iEditUser>({
+    resolver: yupResolver(editUserSchema),
+  });
+
   function refreshPage(id: string | null) {
-    // const id = localStorage.getItem('@MyList:USERID')
     const token = localStorage.getItem('@MyList:TOKEN')
 
     if (id && token) {
@@ -63,7 +67,7 @@ export function UserProvider({ children }: iProviderProps) {
   function editUser(data: iEditContacte) {
     const id = localStorage.getItem('@MyList:USERID')
     api
-      .patch(`user/${seeItensModal?.id}`, data)
+      .patch(`users/${id}`, data)
       .then(() => {
         refreshPage(id)
         openOrCloseModal('user', false)
@@ -71,9 +75,10 @@ export function UserProvider({ children }: iProviderProps) {
   }
 
   function deleteUser() {
-    const idUser = localStorage.getItem('@MyList:USERID')
+    const token = localStorage.getItem('@MyList:TOKEN')
+    api.defaults.headers.authorization = `Bearer ${token}`
     api
-      .delete(`user/${idUser}`)
+      .delete(`users`)
       .then(() => {
         localStorage.removeItem('@MyList:USERID')
         localStorage.removeItem('@MyList:TOKEN')
@@ -81,12 +86,9 @@ export function UserProvider({ children }: iProviderProps) {
           navigate('/')
         }, 500);
       })
-  }
-
-  function toEdit() {
-    if (seeItensModal?.user) {
-      
-    }
+      .catch(err => {
+      toast.error(err.data.message)
+    })
   }
 
   function userLogin(data: iLogin) {
@@ -156,7 +158,6 @@ export function UserProvider({ children }: iProviderProps) {
         refreshPage(id)
         openOrCloseModal('editContacte', false)
       })
-
   }
 
   function deleteItem(id: string) {
@@ -218,7 +219,7 @@ export function UserProvider({ children }: iProviderProps) {
   }
 
   return (
-    <UserContext.Provider value={({ user, setUser, userLogin, handleLogin, returnLogin, userRegister, login, handleSubmit, register, loginError, errors, registerPage, listContactes, userinfos, signOut, refreshPage, setuserinfos, setlistContactes, registerContacte, submitContacte, contacteError, deleteItem, createContacte, seeCreateContacteModal, seePerfilModal, seeEditModal, seeDeleteModal, seeEditUserModal, openOrCloseModal, seeItensModal, setseeItensModal, changeModal, registerEditContacte, submitEditContacte, editContacteError, editContacte })}>
+    <UserContext.Provider value={({ user, setUser, userLogin, handleLogin, returnLogin, userRegister, login, handleSubmit, register, loginError, errors, registerPage, listContactes, userinfos, signOut, refreshPage, setuserinfos, setlistContactes, registerContacte, submitContacte, contacteError, deleteItem, createContacte, seeCreateContacteModal, seePerfilModal, seeEditModal, seeDeleteModal, seeEditUserModal, openOrCloseModal, seeItensModal, setseeItensModal, changeModal, registerEditContacte, submitEditContacte, editContacteError, editContacte, registerEditUser, submitEditUser, editUserError, editUser, deleteUser })}>
       {children}
     </UserContext.Provider>
   )

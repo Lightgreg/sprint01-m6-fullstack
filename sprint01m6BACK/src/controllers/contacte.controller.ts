@@ -10,9 +10,8 @@ export const listMyContactesController = async (req, res: Response) => {
   return res.status(200).json(contactes)
 }
 
-export const createContacteController = async (req: Request, res: Response) => {
-  const contacte = await createContacteService(req.body, req.body.id)
-  console.log(req.body)
+export const createContacteController = async (req, res: Response) => {
+  const contacte = await createContacteService(req.body, req.user.id)
   return res.status(201).json(contacte)
 }
 

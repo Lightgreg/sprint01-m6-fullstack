@@ -15,9 +15,11 @@ const validateTokenMiddleware = async (req, res: Response, next: NextFunction) =
     if (error) {
       return res.status(401).json(error);
     }
+    req.body.id = decoded.sub as string,
     req.user = {
       id: decoded.sub as string,
     };
+    
     return next();
   });
 };

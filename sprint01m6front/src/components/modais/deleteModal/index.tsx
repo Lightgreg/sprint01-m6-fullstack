@@ -5,10 +5,14 @@ import { Backgroundmodal } from "../style";
 
 function DeleteModal(props: iPerfilProps) {
 
-  const { openOrCloseModal, deleteItem } = useContext(UserContext)
+  const { openOrCloseModal, deleteItem, deleteUser, seeItensModal } = useContext(UserContext)
 
   function deleteAndCloseModal() {    
-    deleteItem(props?.id)
+    if (seeItensModal?.user == false) {
+      deleteItem(props?.id)      
+    } else {
+      deleteUser()
+    }
     openOrCloseModal('delete',false)
   }
 

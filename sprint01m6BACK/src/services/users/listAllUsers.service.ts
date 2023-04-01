@@ -2,9 +2,6 @@ import AppDataSource from "../../data-source"
 import { User } from "../../entities/user.entity"
 import { listUsersResponse } from "../../serializers/user.serializers"
 
-
-
-
 const listAllUsersService = async () => {
     const usersRep = AppDataSource.getRepository(User)
 

@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { createUsersController, deleteUsersController, listAllUsersController, updateUsersController } from "../controllers/user.controller";
+import { createUsersController, deleteUsersController, listAllUsersController, listUniqueUserController, updateUsersController } from "../controllers/user.controller";
+import validateTokenMiddleware from "../middlewares/validateToken.middleware";
 
 const userRoutes = Router();
 
 userRoutes.post("", createUsersController);
-userRoutes.get("", listAllUsersController);
-userRoutes.patch("/:id", updateUsersController);
-userRoutes.delete("", deleteUsersController);
+userRoutes.get("", validateTokenMiddleware, listAllUsersController);
+userRoutes.get("/:id", listUniqueUserController);
+userRoutes.patch("/:id", validateTokenMiddleware, updateUsersController);
+userRoutes.delete("/:id", deleteUsersController);
 
 export default userRoutes;

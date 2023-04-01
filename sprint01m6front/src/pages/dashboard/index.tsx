@@ -11,9 +11,10 @@ import PerfilModal from "../../components/modais/perfilModal"
 import { UserContext } from "../../contexts/userContext"
 import { Title1 } from "../login/style"
 import { DashContainer } from "./style"
+import EditUserModal from "../../components/modais/editUserModal"
 
 function Dashboard() {
-  const { signOut, listContactes, userinfos, seeCreateContacteModal, openOrCloseModal, seePerfilModal, seeEditModal, seeItensModal, setseeItensModal, seeDeleteModal, submitEditContacte, editContacte } = useContext(UserContext)
+  const { signOut, listContactes, userinfos, seeCreateContacteModal, openOrCloseModal, seePerfilModal, seeEditModal, seeItensModal, setseeItensModal, seeDeleteModal, submitEditContacte, editContacte, seeEditUserModal, submitEditUser, editUser } = useContext(UserContext)
 
   function setInfos(infos:any, modal: string, option: boolean) { 
     infos.user = option
@@ -51,6 +52,7 @@ function Dashboard() {
       </Backgroundscreen>
       {!!seeCreateContacteModal && < ContacteModal />}
       {!!seeEditModal && < EditModal submit={submitEditContacte(editContacte)}/>}
+      {!!seeEditUserModal && < EditUserModal submit={submitEditUser(editUser)}/>}
       {!!seeDeleteModal && < DeleteModal {...seeItensModal} />}
       {!!seePerfilModal && < PerfilModal {...seeItensModal} />}
     </>
