@@ -4,7 +4,7 @@ import { User } from "../../entities/user.entity"
 const deleteUserService = async (userId: string): Promise<{}> => {
   const usersRep = AppDataSource.getRepository(User)
 
-  const findUser = await usersRep.findOneBy({  
+  const findUser = await usersRep.findOneByOrFail({  
       id: userId    
   })
 

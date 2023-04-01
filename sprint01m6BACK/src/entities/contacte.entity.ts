@@ -12,13 +12,13 @@ export class Contacte {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   name: string
 
-  @Column()
+  @Column({ nullable: false })
   email: string
 
-  @Column()
+  @Column({ nullable: false })
   phone: string
 
   @CreateDateColumn()

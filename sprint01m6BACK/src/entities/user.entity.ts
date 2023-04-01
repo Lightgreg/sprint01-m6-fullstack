@@ -12,16 +12,16 @@ export class User {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column()
+	@Column({ nullable: false })
 	name:string
 
-	@Column({ unique: true })
+	@Column({ nullable: false, unique: true })
 	email: string
 	
-	@Column()
+	@Column({ nullable: false })
 	password:string
 
-	@Column()
+	@Column({ nullable: false })
 	phone:string
 
 	@CreateDateColumn()
